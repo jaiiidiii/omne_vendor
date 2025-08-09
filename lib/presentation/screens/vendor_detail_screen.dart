@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:omne_vendor/data/models/vendor_model.dart';
+import 'package:omne_vendor/domain/entities/vendor_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class VendorDetailScreen extends StatelessWidget {

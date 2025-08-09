@@ -1,13 +1,12 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:faker/faker.dart';
-import 'package:omne_vendor/data/models/vendor_model.dart';
+import 'package:omne_vendor/domain/entities/vendor_model.dart';
 
 class VendorApiService {
-  Future<List<VendorModel>> fetchVendors() async {
-    // Simulate network delay
+  Future<String> fetchVendors() async {
     await Future.delayed(Duration(seconds: Random().nextInt(2) + 1));
 
-    // Generate a list of 50 fake vendors
     final faker = Faker();
     final vendors = List<VendorModel>.generate(50, (index) {
       return VendorModel(
@@ -21,6 +20,10 @@ class VendorApiService {
       );
     });
 
-    return vendors;
+    final List<Map<String, dynamic>> jsonList = vendors
+        .map((vendor) => vendor.toJson())
+        .toList();
+
+    return jsonEncode(jsonList);
   }
 }

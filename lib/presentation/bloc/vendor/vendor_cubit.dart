@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:omne_vendor/data/models/vendor_model.dart';
-import 'package:omne_vendor/data/repositories/vendor_repository.dart';
+import 'package:omne_vendor/domain/entities/vendor_model.dart';
+import 'package:omne_vendor/domain/repositories/vendor_repository.dart';
 
 part 'vendor_state.dart';
 

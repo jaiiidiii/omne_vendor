@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:omne_vendor/logic/cubit/vendor/vendor_cubit.dart';
+import 'package:omne_vendor/presentation/bloc/vendor/vendor_cubit.dart';
 import 'package:omne_vendor/presentation/widgets/no_results.dart';
 import 'package:omne_vendor/presentation/widgets/start_searching.dart';
 import 'package:omne_vendor/presentation/widgets/theme_toggle_button.dart';

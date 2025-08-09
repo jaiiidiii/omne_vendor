@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:omne_vendor/data/models/vendor_model.dart';
-import 'package:omne_vendor/logic/cubit/favorites/favorites_cubit.dart';
-import 'package:omne_vendor/logic/cubit/vendor/vendor_cubit.dart';
+import 'package:omne_vendor/domain/entities/vendor_model.dart';
+import 'package:omne_vendor/presentation/bloc/favorites/favorites_cubit.dart';
+import 'package:omne_vendor/presentation/bloc/vendor/vendor_cubit.dart';
 import 'package:omne_vendor/presentation/widgets/no_results.dart';
 import 'package:omne_vendor/presentation/widgets/vendor_item.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:omne_vendor/core/navigation/routes.dart';
-import 'package:omne_vendor/data/models/vendor_model.dart';
+import 'package:omne_vendor/domain/entities/vendor_model.dart';
 import 'package:omne_vendor/presentation/screens/vendor_detail_screen.dart';
 import 'package:omne_vendor/presentation/screens/vendor_search_screen.dart';
 

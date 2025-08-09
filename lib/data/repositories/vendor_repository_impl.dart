@@ -1,13 +1,17 @@
-import 'package:omne_vendor/data/models/vendor_model.dart';
+import 'dart:convert';
+
 import 'package:omne_vendor/data/services/database_helper.dart';
 import 'package:omne_vendor/data/services/vendor_api_service.dart';
+import 'package:omne_vendor/domain/entities/vendor_model.dart';
+import 'package:omne_vendor/domain/repositories/vendor_repository.dart';
 
-class VendorRepository {
+class MockVendorRepository implements VendorRepository {
   final VendorApiService _apiService;
   final DatabaseHelper _databaseHelper;
 
-  VendorRepository(this._apiService, this._databaseHelper);
+  MockVendorRepository(this._apiService, this._databaseHelper);
 
+  @override
   Future<List<VendorModel>> getVendors({bool forceRefresh = false}) async {
     // Check for cached data first
     final cachedVendors = await _databaseHelper.getVendors();
@@ -16,7 +20,16 @@ class VendorRepository {
     }
     // Otherwise, fetch from API
     try {
-      final vendors = await _apiService.fetchVendors();
+      final String jsonResponse = await _apiService.fetchVendors();
+
+      // Decode the JSON string into a list of dynamic objects
+      final List<dynamic> jsonList = jsonDecode(jsonResponse);
+
+      // Map the dynamic list to a list of VendorModel objects using fromJson
+      final vendors = jsonList
+          .map((json) => VendorModel.fromJson(json as Map<String, dynamic>))
+          .toList();
+
       await _databaseHelper.insertVendors(vendors);
       return vendors;
     } catch (e) {
@@ -28,14 +41,17 @@ class VendorRepository {
     }
   }
 
+  @override
   Future<void> addFavorite(VendorModel vendor) async {
     return _databaseHelper.addFavorite(vendor);
   }
 
+  @override
   Future<void> removeFavorite(int vendorId) async {
     return _databaseHelper.removeFavorite(vendorId);
   }
 
+  @override
   Future<List<VendorModel>> getFavorites() async {
     return _databaseHelper.getFavorites();
   }

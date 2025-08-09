@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:omne_vendor/core/navigation/navigation_service.dart';
-import 'package:omne_vendor/data/models/vendor_model.dart';
+import 'package:omne_vendor/domain/entities/vendor_model.dart';
 
 class VendorItem extends StatelessWidget {
   const VendorItem({

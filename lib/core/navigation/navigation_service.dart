@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:omne_vendor/data/models/vendor_model.dart';
+import 'package:omne_vendor/domain/entities/vendor_model.dart';
 
 abstract final class NavigationService {
   static void go(BuildContext context, String location, {Object? extra}) {

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:omne_vendor/core/ioc/ioc_manager.dart';
 import 'package:omne_vendor/core/navigation/app_router.dart';
 import 'package:omne_vendor/core/theme/themes.dart';
-import 'package:omne_vendor/logic/cubit/favorites/favorites_cubit.dart';
-import 'package:omne_vendor/logic/cubit/theme/theme_cubit.dart';
-import 'package:omne_vendor/logic/cubit/vendor/vendor_cubit.dart';
+import 'package:omne_vendor/presentation/bloc/favorites/favorites_cubit.dart';
+import 'package:omne_vendor/presentation/bloc/theme/theme_cubit.dart';
+import 'package:omne_vendor/presentation/bloc/vendor/vendor_cubit.dart';
 
 Future<void> main() async {
   await IocManager.register();
