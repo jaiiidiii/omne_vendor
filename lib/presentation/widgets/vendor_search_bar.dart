@@ -1,6 +1,5 @@
-// lib/presentation/widgets/search_bar.dart
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:omne_vendor/core/utils/debouncer.dart';
 
 class VendorSearchBar extends StatefulWidget {
   final Function(String) onChanged;
@@ -13,39 +12,52 @@ class VendorSearchBar extends StatefulWidget {
 
 class _VendorSearchBarState extends State<VendorSearchBar> {
   final _textController = TextEditingController();
-  Timer? _debounce;
+  final _debouncer = Debouncer(milliseconds: 300);
 
   _onSearchChanged(String query) {
-    if (_debounce?.isActive ?? false) _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 300), () {
+    _debouncer.run(() {
       widget.onChanged(query);
     });
   }
 
   @override
   void dispose() {
-    _debounce?.cancel();
+    _debouncer.dispose();
     _textController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: _textController,
-      textInputAction: TextInputAction.search,
-
-      onChanged: _onSearchChanged,
-      onSubmitted: (query) {
-        // You can add logic here if a full search is needed on submit,
-        // but for real-time filtering, onChanged is sufficient.
-        // This is good practice for a formal search button or submit action.
-        // e.g., print('Search submitted for: $query');
-      },
-      decoration: InputDecoration(
-        labelText: 'Search for vendors...',
-        // border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
-        prefixIcon: Icon(Icons.search),
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      child: TextField(
+        controller: _textController,
+        textInputAction: TextInputAction.search,
+        onChanged: _onSearchChanged,
+        onSubmitted: (query) {
+          _debouncer.run(() {
+            widget.onChanged(query);
+          });
+        },
+        decoration: InputDecoration(
+          labelText: 'Search for vendors...',
+          prefixIcon: const Icon(Icons.search),
+          suffixIcon: IconButton(
+            icon: const Icon(Icons.clear),
+            onPressed: () {
+              _textController.clear();
+              widget.onChanged('');
+            },
+          ),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16.0,
+            vertical: 12.0,
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+        ),
       ),
     );
   }

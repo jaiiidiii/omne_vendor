@@ -1,12 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:omne_vendor/core/navigation/navigation_service.dart';
 import 'package:omne_vendor/data/models/vendor_model.dart';
-import 'package:omne_vendor/presentation/screens/vendor_detail_screen.dart';
 
 class VendorItem extends StatelessWidget {
-  const VendorItem({super.key, required this.vendor});
+  const VendorItem({
+    super.key,
+    required this.vendor,
+    required this.isFavorite,
+    required this.onToggleFavorite,
+  });
 
   final VendorModel vendor;
+  final bool isFavorite;
+  final VoidCallback onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -30,44 +37,28 @@ class VendorItem extends StatelessWidget {
             ),
           ),
         ),
-        // leading: Hero(
-        //   tag: 'vendor-image-${vendor.vendorId}',
-        //   child: CircleAvatar(
-        //     backgroundImage: CachedNetworkImageProvider(vendor.imageUrl),
-        //   ),
-        // ),
         title: Hero(
           tag: 'vendor-name-${vendor.vendorId}',
           child: Material(
             type: MaterialType.transparency,
             child: Text(
               vendor.name,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
         ),
-        // title: Text(
-        //   vendor.name,
-        //   style: Theme.of(context).textTheme.titleLarge,
-        // ),
         subtitle: Text(
           vendor.category,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        trailing: Icon(
-          Icons.arrow_forward_ios,
-          size: 16,
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+        trailing: IconButton(
+          icon: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: isFavorite ? Colors.red : null,
+          ),
+          onPressed: onToggleFavorite,
         ),
-
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => VendorDetailScreen(vendor: vendor),
-            ),
-          );
-        },
+        onTap: () => NavigationService.goToVendorDetail(context, vendor),
       ),
     );
   }

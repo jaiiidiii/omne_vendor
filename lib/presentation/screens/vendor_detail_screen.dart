@@ -1,4 +1,3 @@
-// lib/presentation/screens/vendor_detail_screen.dart
 import 'package:flutter/material.dart';
 import 'package:omne_vendor/data/models/vendor_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,71 +10,86 @@ class VendorDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(vendor.name),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
       extendBodyBehindAppBar: true,
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // Hero animation for image transition
             Hero(
               tag: 'vendor-image-${vendor.vendorId}',
               child: CachedNetworkImage(
                 imageUrl: vendor.imageUrl,
-                height: 250,
+                height: 300,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Container(
-                  height: 250,
+                  height: 300,
                   color: Colors.grey[200],
-                  child: Center(child: CircularProgressIndicator()),
+                  child: const Center(child: CircularProgressIndicator()),
                 ),
                 errorWidget: (context, url, error) => Container(
-                  height: 250,
+                  height: 300,
                   color: Colors.grey[200],
-                  child: Icon(Icons.error, color: Colors.red),
+                  child: const Icon(Icons.error, color: Colors.red),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Hero animation for name transition
                   Hero(
                     tag: 'vendor-name-${vendor.vendorId}',
                     child: Material(
                       type: MaterialType.transparency,
                       child: Text(
                         vendor.name,
-                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                        style: Theme.of(context).textTheme.headlineLarge!
+                            .copyWith(
                               fontWeight: FontWeight.bold,
+                              fontSize: 28,
                             ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Category: ${vendor.category}',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 12),
+                  // Vendor Rating
                   Row(
                     children: [
-                      Icon(Icons.star, color: Colors.amber, size: 20),
-                      SizedBox(width: 4),
+                      const Icon(Icons.star, color: Colors.amber, size: 24),
+                      const SizedBox(width: 8),
                       Text(
                         vendor.rating.toStringAsFixed(1),
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 16),
+                  // Vendor Category
                   Text(
-                    'Location: ${vendor.location}',
-                    style: Theme.of(context).textTheme.titleMedium,
+                    'Category:',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    vendor.category,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  const SizedBox(height: 16),
+                  // Vendor Location
+                  Text(
+                    'Location:',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    vendor.location,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
               ),

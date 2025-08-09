@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:omne_vendor/data/models/vendor_model.dart';
-import 'package:omne_vendor/logic/cubit/vendor_cubit.dart';
+import 'package:omne_vendor/logic/cubit/favorites/favorites_cubit.dart';
+import 'package:omne_vendor/logic/cubit/vendor/vendor_cubit.dart';
+import 'package:omne_vendor/presentation/widgets/no_results.dart';
 import 'package:omne_vendor/presentation/widgets/vendor_item.dart';
 
 class VendorList extends StatelessWidget {
@@ -12,19 +14,34 @@ class VendorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (vendors.isEmpty) {
-      return const Center(child: Text('No vendors found.'));
+      return const NoResultsWidget();
     }
+    return BlocBuilder<FavoritesCubit, FavoritesState>(
+      builder: (context, favoritesState) {
+        List<VendorModel> favorites = [];
+        if (favoritesState is FavoritesLoaded) {
+          favorites = favoritesState.favorites;
+        }
+        return RefreshIndicator(
+          onRefresh: () => context.read<VendorCubit>().refreshVendors(),
+          child: ListView.builder(
+            itemCount: vendors.length,
+            itemBuilder: (context, index) {
+              final vendor = vendors[index];
+              final isFavorite = favorites.any(
+                (fav) => fav.vendorId == vendor.vendorId,
+              );
 
-    return RefreshIndicator(
-      onRefresh: () => context.read<VendorCubit>().refreshVendors(),
-      child: ListView.builder(
-        itemCount: vendors.length,
-        itemBuilder: (context, index) {
-          final vendor = vendors[index];
-          return VendorItem(vendor: vendor);
-        },
-      ),
+              return VendorItem(
+                vendor: vendor,
+                isFavorite: isFavorite,
+                onToggleFavorite: () =>
+                    context.read<FavoritesCubit>().toggleFavorite(vendor),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
-

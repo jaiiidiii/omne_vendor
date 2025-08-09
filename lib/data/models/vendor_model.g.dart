@@ -13,6 +13,7 @@ VendorModel _$VendorModelFromJson(Map<String, dynamic> json) => VendorModel(
   rating: (json['rating'] as num).toDouble(),
   category: json['category'] as String,
   imageUrl: json['imageUrl'] as String,
+  isFavorite: json['isFavorite'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$VendorModelToJson(VendorModel instance) =>
@@ -23,4 +24,5 @@ Map<String, dynamic> _$VendorModelToJson(VendorModel instance) =>
       'rating': instance.rating,
       'category': instance.category,
       'imageUrl': instance.imageUrl,
+      'isFavorite': instance.isFavorite,
     };

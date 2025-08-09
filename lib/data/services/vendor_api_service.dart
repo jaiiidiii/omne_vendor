@@ -12,20 +12,15 @@ class VendorApiService {
     final vendors = List<VendorModel>.generate(50, (index) {
       return VendorModel(
         vendorId: index + 1,
-        name: '${faker.company.name()} Vendor',
+        name: faker.company.name(),
         location: faker.address.city(),
         rating: (Random().nextDouble() * 2) + 3,
         category: faker.job.title(),
-        // imageUrl: faker.image.image(
-        //   keywords: ['vendor', 'store'],
-        //   width: 640,
-        //   height: 480,
-        // ),
+
         imageUrl: 'https://picsum.photos/seed/vendor${index + 1}/200/200',
       );
     });
 
-    // Return the JSON-formatted data
     return vendors;
   }
 }
