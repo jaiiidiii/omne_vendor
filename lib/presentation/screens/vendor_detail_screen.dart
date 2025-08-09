@@ -16,7 +16,6 @@ class VendorDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Hero animation for image transition
             Hero(
               tag: 'vendor-image-${vendor.vendorId}',
               child: CachedNetworkImage(
