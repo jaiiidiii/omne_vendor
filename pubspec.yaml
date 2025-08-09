@@ -41,17 +41,20 @@ dependencies:
   go_router: ^16.1.0
   hive_flutter: ^1.1.0
   get_it: ^8.2.0
-
+  bloc_test: ^10.0.0
+  mockito: ^5.5.0
+  json_annotation: ^4.9.0
+  cached_network_image: ^3.4.1
+  google_fonts: ^6.3.0
+  # commons:
+  #   path: packages/commons
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  bloc_test: ^10.0.0
-  mockito: ^5.5.0
   flutter_lints: ^5.0.0
   build_runner: ^2.6.0
   json_serializable: ^6.10.0
-  json_annotation: ^4.9.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
