@@ -49,12 +49,12 @@ class _VendorSearchBarState extends State<VendorSearchBar> {
             onPressed: () {
               _textController.clear();
               widget.onChanged('');
+              FocusScope.of(context).unfocus();
             },
           ),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-            vertical: 12.0,
+            horizontal: 8.0,
           ),
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),

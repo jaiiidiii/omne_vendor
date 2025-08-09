@@ -22,10 +22,8 @@ class MockVendorRepository implements VendorRepository {
     try {
       final String jsonResponse = await _apiService.fetchVendors();
 
-      // Decode the JSON string into a list of dynamic objects
       final List<dynamic> jsonList = jsonDecode(jsonResponse);
 
-      // Map the dynamic list to a list of VendorModel objects using fromJson
       final vendors = jsonList
           .map((json) => VendorModel.fromJson(json as Map<String, dynamic>))
           .toList();

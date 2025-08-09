@@ -23,14 +23,11 @@ class VendorModel extends Equatable {
     this.isFavorite = false,
   });
 
-  // Method for network serialization
   factory VendorModel.fromJson(Map<String, dynamic> json) =>
       _$VendorModelFromJson(json);
 
-  // Method for network deserialization
   Map<String, dynamic> toJson() => _$VendorModelToJson(this);
 
-  // Method for sqflite local persistence
   Map<String, dynamic> toMap() {
     return {
       'vendorId': vendorId,
@@ -43,7 +40,6 @@ class VendorModel extends Equatable {
     };
   }
 
-  // Method for sqflite local persistence
   factory VendorModel.fromMap(Map<String, dynamic> map) {
     return VendorModel(
       vendorId: map['vendorId'] as int,

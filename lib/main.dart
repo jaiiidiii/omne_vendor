@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {
           return MaterialApp.router(
-            title: 'Omne Vendor App Demo',
+            title: 'Omne Vendor App',
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: themeState.themeMode,

@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
 
-// final lightTextTheme = GoogleFonts.montserratTextTheme(
-//   ThemeData.light().textTheme,
-// );
-// final darkTextTheme = GoogleFonts.montserratTextTheme(
-//   ThemeData.dark().textTheme,
-// );
-final lightTextTheme = ThemeData.light().textTheme;
-final darkTextTheme = ThemeData.dark().textTheme;
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
@@ -18,7 +9,7 @@ final ThemeData lightTheme = ThemeData(
     foregroundColor: Colors.black,
     elevation: 0,
   ),
-  textTheme: lightTextTheme,
+  textTheme: ThemeData.light().textTheme,
   inputDecorationTheme: InputDecorationTheme(
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.0),
@@ -46,7 +37,7 @@ final ThemeData darkTheme = ThemeData(
     foregroundColor: Colors.white,
     elevation: 0,
   ),
-  textTheme: darkTextTheme,
+  textTheme: ThemeData.dark().textTheme,
   inputDecorationTheme: InputDecorationTheme(
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.0),

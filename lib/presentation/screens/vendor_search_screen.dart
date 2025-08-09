@@ -12,16 +12,16 @@ class VendorSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Vendor Search'),
-        actions: [const ThemeToggleButton()],
-      ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Column(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Vendor Search'),
+          actions: [const ThemeToggleButton()],
+        ),
+        body: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
