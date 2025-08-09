@@ -14,7 +14,7 @@ class VendorApiService {
         name: faker.company.name(),
         location: faker.address.city(),
         rating: (Random().nextDouble() * 2) + 3,
-        category: faker.job.title(),
+        category: faker.conference.name(),
         imageUrl: 'https://picsum.photos/seed/vendor${index + 1}/200/200',
       );
     });
